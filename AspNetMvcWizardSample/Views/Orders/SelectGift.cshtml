@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Gift>
+<h1>Step 2 of 4 - Gift</h1>
+<h3>Please select which gift you want for this year's company gift.</h3>
+
+<form action="/Orders/SelectDelivery" method="post">
+    @{
+        int intcounter = 0;
+        foreach (var gift in Model)
+        {
+            <input id="id_@gift.Id" type="radio" name="giftId" value="@gift.Id" checked="@(intcounter == 0 ? "checked" : null)" } />
+            <label for="id_@gift.Id">@gift.Name</label>
+            <br>
+
+            intcounter++;
+
+        }
+    }
+    <p>
+    <div>
+            <button onclick="history.go(-1);return false;">&lt; Back</button>&nbsp;
+        <button type="submit">Select delivery &gt;</button>
+    </div>
+    </p>
+</form>

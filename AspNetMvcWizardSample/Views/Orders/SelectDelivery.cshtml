@@ -1,0 +1,17 @@
+﻿<h1>Step 3 of 4 - Delivery</h1>
+<h3>Where do you want us to drop your gift off?</h3>
+
+<form action="/Orders/ShowOrder" method="post">
+    <select name="deliveryLocation">
+        @foreach (var deliveryOption in Enum.GetValues<DeliveryLocation>())
+        {
+            <option value="@deliveryOption">@deliveryOption</option>
+        }
+    </select>
+    <p>
+    <div>
+            <button onclick="history.go(-1);return false;">&lt; Back</button>&nbsp;
+        <button type="submit">Place order &gt;</button>
+    </div>
+    </p>
+</form>

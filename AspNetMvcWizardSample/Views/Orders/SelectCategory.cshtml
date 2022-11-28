@@ -1,0 +1,20 @@
+﻿@model IEnumerable<GiftCategory>
+
+<h1>Step 1 of 4 - Type of gift</h1>
+<h3>Please select which type of gift you want for this year's company gift.</h3>
+
+<form action="/Orders/SelectGift" method="post">
+    <select name="giftCategoryId">
+        @foreach (var giftCategory in Model)
+        {
+            <option value="@giftCategory.Id">@giftCategory.Name</option>
+        }
+    </select>
+    <p>
+
+    <div>
+        <button onclick="history.go(-1);return false;">&lt; Back</button>&nbsp;
+        <button type="submit">Select gift &gt;</button>
+    </div>
+    </p>
+</form>

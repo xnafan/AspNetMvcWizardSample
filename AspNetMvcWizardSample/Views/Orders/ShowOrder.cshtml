@@ -1,0 +1,16 @@
+﻿@model Order
+
+
+<h1>Step 4 of 4 - Order completed!</h1>
+
+You have selected
+<h3>
+    @Html.DisplayFor((model) => model.Gift.Name)</h3>
+
+To be delivered at
+<h3>
+    @Html.DisplayFor((model) => model.DeliveryLocation)
+</h3>
+
+Order created
+<h3>@Html.DisplayFor((model) => model.TimeCreated)</h3>
