@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IOrdersDataAccess, InMemoryOrderDataAccess>();
 builder.Services.AddSingleton<IGiftsDataAccess, HardcodedGiftsDataAcess>();
 
+//emulate an actual authentication provider, by hardcoding a stub with the value "42"
+builder.Services.AddSingleton<IAuthenticationProvider>((_)=>new AuthenticationProviderStub(42));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

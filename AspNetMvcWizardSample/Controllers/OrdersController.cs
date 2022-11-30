@@ -1,19 +1,21 @@
 ﻿using AspNetMvcWizardSample.DataAccess;
 using AspNetMvcWizardSample.DataAccess.Model;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace AspNetMvcWizardSample.Controllers;
 public class OrdersController : Controller
 {
-
     private readonly IGiftsDataAccess _giftsData;
     private readonly IOrdersDataAccess _ordersData;
+    private readonly IAuthenticationProvider _authenticationProvider;
 
-    public OrdersController(IGiftsDataAccess giftsData, IOrdersDataAccess ordersData)
+    public OrdersController(IGiftsDataAccess giftsData, IOrdersDataAccess ordersData, IAuthenticationProvider authenticationProvider)
     {
         _giftsData = giftsData;
         _ordersData = ordersData;
+        _authenticationProvider = authenticationProvider;
     }
 
     //Step 1 of 4 - select the category of gift
@@ -45,6 +47,11 @@ public class OrdersController : Controller
     {
         var order = GetOrderFromTempData();
         order.DeliveryLocation = deliveryLocation;
+
+        //this line is added to emulate getting the current user
+        //from an authentication scheme (login)
+        //which is not included in this code sample
+        order.EmployeeId = _authenticationProvider.GetCurrentUserId();
         _ordersData.AddOrder(order);
         StoreOrderInTempData(order);
         return View(order);
