@@ -1,4 +1,4 @@
-# AspNetMvcWizardSample
+# Asp.Net Mvc Wizard
 Sample ASP.NET MVC page with step-by-step wizard for ordering the company x-mas gift.
 
 <img width="713" alt="image" src="https://user-images.githubusercontent.com/3811290/204812610-8a7e1444-ba20-46ea-b8bb-1f030913ae99.png">
@@ -11,7 +11,6 @@ Each action has a view, with a form which posts to the next action.
     //NOTE: only selected actions of the controller are shown here
     public class OrdersController : Controller
     {
-    
         //Step 1 of 4 - select the category of gift
         public ActionResult SelectCategory() {...}
 
@@ -27,4 +26,5 @@ Each action has a view, with a form which posts to the next action.
         [HttpPost]
         public ActionResult ShowOrder(DeliveryLocation deliveryLocation) {...}
     }
+
 
