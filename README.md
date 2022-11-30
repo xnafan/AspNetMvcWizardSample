@@ -8,23 +8,44 @@ This solution focuses on the step-by-step nature of a wizard (e.g. in creating a
 It is basically an ASP.NET MVC Controller class [OrdersController](https://github.com/xnafan/AspNetMvcWizardSample/blob/master/AspNetMvcWizardSample/Controllers/OrdersController.cs), which has an action for each step in the wizard.
 Each action has a view, with a form which posts to the next action.
 
-    //NOTE: only selected actions of the controller are shown here
-    public class OrdersController : Controller
-    {
-        //Step 1 of 4 - select the category of gift
-        public ActionResult SelectCategory() {...}
+```cs
+//NOTE: only selected actions of the controller are shown here
+public class OrdersController : Controller
+{
+    //Step 1 of 4 - select the category of gift
+    public ActionResult SelectCategory() {...}
 
-        //Step 2 of 4 - select the actual gift
-        [HttpPost]
-        public ActionResult SelectGift(int giftCategoryId){...}
+    //Step 2 of 4 - select the actual gift
+    [HttpPost]
+    public ActionResult SelectGift(int giftCategoryId){...}
 
-        //Step 3 of 4 - select where the gift should be delivered
-        [HttpPost]
-        public ActionResult SelectDelivery(int giftId) {...}
+    //Step 3 of 4 - select where the gift should be delivered
+    [HttpPost]
+    public ActionResult SelectDelivery(int giftId) {...}
 
-        //Step 4 of 4 - save the finished order and display it
-        [HttpPost]
-        public ActionResult ShowOrder(DeliveryLocation deliveryLocation) {...}
-    }
+    //Step 4 of 4 - save the finished order and display it
+    [HttpPost]
+    public ActionResult ShowOrder(DeliveryLocation deliveryLocation) {...}
+}
+```
+To enable the order (created in SelectDelivery()) to be sent to the final action (ShowOrder()), the Order object is stored in TempData[] using two helpermethods:
 
+```cs
+ #region Helpermethods
 
+//////////// HELPER METHODS /////////////////////////////////
+//The following two methods are helpermethods
+//to allow for the storage and retrieval of an Order object
+//between actions on the controller
+//////////////////////////////////////////////////////////
+private void StoreOrderInTempData(Order order)
+{
+    TempData["Order"] = JsonConvert.SerializeObject(order);
+}
+private Order GetOrderFromTempData()
+{
+    return JsonConvert.DeserializeObject<Order>((string)TempData["Order"]);
+}
+////////////////////////////////////////////////////////// 
+#endregion
+```
