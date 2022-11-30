@@ -2,6 +2,8 @@
   font-size: 22px;
 }
 
+body {background-image: url("/gfx/wallpaper.jpg");background-size:cover;}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
