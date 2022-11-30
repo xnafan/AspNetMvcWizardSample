@@ -81,3 +81,16 @@ This is implemented as an in-memory store, but could easily use a database.
 The [IAuthenticationProvider](https://github.com/xnafan/AspNetMvcWizardSample/blob/master/AspNetMvcWizardSample/DataAccess/IAuthenticationProvider.cs) interface defines the needed functionality for the controller to be able to
 * retrieve the current user
 This is implemented as a stub, which just returns 42, but could be hooked up to ASP.NET Authentication.
+
+##Registering dependencies for Dependency Injection
+The interfaces mentioned above are registered in the [Program.cs](https://github.com/xnafan/AspNetMvcWizardSample/blob/master/AspNetMvcWizardSample/Program.cs) file:
+
+```cs
+// Add services to the container.
+builder.Services.AddSingleton<IOrdersDataAccess, InMemoryOrderDataAccess>();
+builder.Services.AddSingleton<IGiftsDataAccess, HardcodedGiftsDataAcess>();
+
+//emulate an actual authentication provider, by hardcoding a stub with the value "42"
+builder.Services.AddSingleton<IAuthenticationProvider>((_)=>new AuthenticationProviderStub(42));
+```
+so the ASP.NET framework knows which classes to instantiate for the OrdersController's constructor.
