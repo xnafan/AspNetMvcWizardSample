@@ -1,7 +1,10 @@
 using AspNetMvcWizardSample.DataAccess;
-using Microsoft.AspNetCore.HttpLogging;
+
+//uncomment this to enable logging
+//using Microsoft.AspNetCore.HttpLogging; 
 
 var builder = WebApplication.CreateBuilder(args);
+
 // Add services to the container.
 builder.Services.AddSingleton<IOrdersDataAccess, InMemoryOrderDataAccess>();
 builder.Services.AddSingleton<IGiftsDataAccess, HardcodedGiftsDataAcess>();
