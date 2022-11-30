@@ -3,7 +3,7 @@ Sample ASP.NET MVC page with step-by-step wizard for ordering the company x-mas 
 
 <img width="713" alt="image" src="https://user-images.githubusercontent.com/3811290/204812610-8a7e1444-ba20-46ea-b8bb-1f030913ae99.png">
 
-#Basic functionality
+# Basic functionality
 This solution focuses on the step-by-step nature of a wizard (e.g. in creating an order).  
 It is basically an ASP.NET MVC Controller class [OrdersController](https://github.com/xnafan/AspNetMvcWizardSample/blob/master/AspNetMvcWizardSample/Controllers/OrdersController.cs), which has an action for each step in the wizard.
 Each action has a view, with a form which posts the user's selections to the next action (i.e. gift category, gift, place of delivery):
@@ -51,7 +51,7 @@ private Order GetOrderFromTempData()
 ```
 **Note** that it is perfectly fine to store an object in TempData through the entire wizard flow. It is just not necessary in the four steps above, as the only thing sent from the `SelectCategory` action is the category id and the only thing sent from the `SelectGift`action is the gift id.
 
-#Architecture
+# Architecture
 This project uses Dependency Injection to enable low coupling between components.
 This means that the `OrdersController` receives the components it is dependent on in its constructor:
 
@@ -82,7 +82,7 @@ The [IAuthenticationProvider](https://github.com/xnafan/AspNetMvcWizardSample/bl
 * retrieve the current user
 This is implemented as a stub, which just returns 42, but could be hooked up to ASP.NET Authentication.
 
-##Registering dependencies for Dependency Injection
+## Registering dependencies for Dependency Injection
 The interfaces mentioned above are registered in the [Program.cs](https://github.com/xnafan/AspNetMvcWizardSample/blob/master/AspNetMvcWizardSample/Program.cs) file:
 
 ```cs
