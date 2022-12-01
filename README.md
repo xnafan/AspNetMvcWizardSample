@@ -30,7 +30,7 @@ public class OrdersController : Controller
 ```
 
 ## Passing user from action to action using forms
-The way the forms (from the call to ´View()´ in each of the´OrdersController´'s actions) sends the user to the next action is via the ´"action"´ attribute on the forms.  
+The way the forms (from the call to `View()` in each of the`OrdersController`'s actions) sends the user to the next action is via the `"action"` attribute on the forms and a form element with a name that matches the parameter of the following action.
 
 ### Select category form
 ```html
@@ -50,7 +50,8 @@ The way the forms (from the call to ´View()´ in each of the´OrdersController�
     </p>
 </form>
 ```
-...so it can pass the user to the next action on postback, with the value of the selected ´giftCategoryId´.
+*Note* how the form's `action` attribute has the value `/Orders/SelectGiftId` so it matches the name of the next action in the wizard, and the name of the `select` (drop down) is `giftCategoryId` so it matches the parameter in the `SelectGift(int giftCategoryId)` action on the controller.
+...so it can pass the user to the next action on postback, with the value of the selected `giftCategoryId`.
 
 ### Select gift form
 ```html
@@ -72,6 +73,7 @@ The way the forms (from the call to ´View()´ in each of the´OrdersController�
     </p>
 </form>
 ```
+*Note* how the form's `action` attribute has the value `/Orders/SelectDelivery` so it matches the name of the next action in the wizard, and the name of the input (radio buttons) is `giftId` so it matches the parameter in the `SelectDelivery(int giftId)` action on the controller.
 
 ### Select delivery form
 ```html
@@ -89,6 +91,9 @@ The way the forms (from the call to ´View()´ in each of the´OrdersController�
     </p>
 </form>
 ```
+*Note* how the form's `action` attribute has the value `/Orders/ShowOrder` so it matches the name of the next action in the wizard, and the name of the select (drop down) is `deliveryLocation` so it matches the parameter in the `ShowOrder(DeliveryLocation deliveryLocation)` action on the controller. Since the dropdown in the form is populated from the enum `DeliveryLocation`, the string value passed from the form to the `ShowOrder` action is automatically parsed to a value from that enum.
+
+
 # Using TempData[...] for object storage
 To enable the order object (created in the SelectDelivery() method) to be sent to the final action (ShowOrder()), the Order object is stored in and retrieved from TempData[] using two helpermethods:
 
