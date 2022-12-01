@@ -33,7 +33,7 @@ public class OrdersController : Controller
 The way the forms (from the call to ´View()´ in each of the´OrdersController´'s actions) sends the user to the next action is via the ´"action"´ attribute on the forms.  
 
 ### Select category form
-´´´html
+```html
 <form action="/Orders/SelectGift" method="post">
     <select name="giftCategoryId">
             <option value="1">Candy</option>
@@ -49,11 +49,11 @@ The way the forms (from the call to ´View()´ in each of the´OrdersController�
     </div>
     </p>
 </form>
-´´´
+```
 ...so it can pass the user to the next action on postback, with the value of the selected ´giftCategoryId´.
 
 ### Select gift form
-´´´html
+```html
 <form action="/Orders/SelectDelivery" method="post">
             <input id="id_11" type="radio" name="giftId" value="11" checked="checked" } />
             <label for="id_11">Dark coding chocolates</label>
@@ -71,10 +71,10 @@ The way the forms (from the call to ´View()´ in each of the´OrdersController�
     </div>
     </p>
 </form>
-´´´
+```
 
 ### Select delivery form
-´´´html
+```html
 <form action="/Orders/ShowOrder" method="post">
     <select name="deliveryLocation">
             <option value="Work">Work</option>
@@ -88,7 +88,7 @@ The way the forms (from the call to ´View()´ in each of the´OrdersController�
     </div>
     </p>
 </form>
-´´´
+```
 # Using TempData[...] for object storage
 To enable the order object (created in the SelectDelivery() method) to be sent to the final action (ShowOrder()), the Order object is stored in and retrieved from TempData[] using two helpermethods:
 
