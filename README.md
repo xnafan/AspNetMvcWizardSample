@@ -28,6 +28,68 @@ public class OrdersController : Controller
     public ActionResult ShowOrder(DeliveryLocation deliveryLocation) {...}
 }
 ```
+
+## Passing user from action to action using forms
+The way the forms (from the call to ´View()´ in each of the´OrdersController´'s actions) sends the user to the next action is via the ´"action"´ attribute on the forms.  
+
+### Select category form
+´´´html
+<form action="/Orders/SelectGift" method="post">
+    <select name="giftCategoryId">
+            <option value="1">Candy</option>
+            <option value="2">Wearables</option>
+            <option value="3">Household items</option>
+            <option value="4">Electronics</option>
+    </select>
+    <p>
+
+    <div>
+        <button onclick="history.go(-1);return false;">&lt; Back</button>&nbsp;
+        <button type="submit">Select gift &gt;</button>
+    </div>
+    </p>
+</form>
+´´´
+...so it can pass the user to the next action on postback, with the value of the selected ´giftCategoryId´.
+
+### Select gift form
+´´´html
+<form action="/Orders/SelectDelivery" method="post">
+            <input id="id_11" type="radio" name="giftId" value="11" checked="checked" } />
+            <label for="id_11">Dark coding chocolates</label>
+            <br>
+            <input id="id_12" type="radio" name="giftId" value="12" } />
+            <label for="id_12">Programmers Energy Drink &#x27;!Boozta!&#x27;</label>
+            <br>
+            <input id="id_13" type="radio" name="giftId" value="13" } />
+            <label for="id_13">Debugging Edibles</label>
+            <br>
+    <p>
+    <div>
+            <button onclick="history.go(-1);return false;">&lt; Back</button>&nbsp;
+        <button type="submit">Select delivery &gt;</button>
+    </div>
+    </p>
+</form>
+´´´
+
+### Select delivery form
+´´´html
+<form action="/Orders/ShowOrder" method="post">
+    <select name="deliveryLocation">
+            <option value="Work">Work</option>
+            <option value="Home">Home</option>
+            <option value="Reception">Reception</option>
+    </select>
+    <p>
+    <div>
+            <button onclick="history.go(-1);return false;">&lt; Back</button>&nbsp;
+        <button type="submit">Place order &gt;</button>
+    </div>
+    </p>
+</form>
+´´´
+# Using TempData[...] for object storage
 To enable the order object (created in the SelectDelivery() method) to be sent to the final action (ShowOrder()), the Order object is stored in and retrieved from TempData[] using two helpermethods:
 
 ```cs
